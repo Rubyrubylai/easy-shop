@@ -1,4 +1,3 @@
-const { image } = require('faker');
 const db = require('../models');
 const { Product } = db;
 
@@ -8,7 +7,10 @@ module.exports = {
       let products = await Product.findAll({
         raw: true,
         nest: true,
-        attributes: ['name', 'price', 'image']
+        attributes: ['name', 'price', 'image'],
+        order: [
+          ['updatedAt', 'DESC']
+        ]
       });
       return res.json({
         code: 200,
@@ -17,6 +19,10 @@ module.exports = {
     }
     catch (err) {
       console.error(`getProducts fail, ${err.message}`);
+      return res.json({
+        code: 500,
+        message: e.message
+      });
     }
   },
 
@@ -32,7 +38,7 @@ module.exports = {
       if (!product) {
         return res.json({
           code: 400,
-          message: 'productId does not exist'
+          message: 'productId does not exist.'
         });
       }
       product = product.toJSON();
@@ -43,6 +49,10 @@ module.exports = {
     }
     catch (err) {
       console.error(`getProduct fail, ${err.message}`);
+      return res.json({
+        code: 500,
+        message: e.message
+      });
     }
   }
 }
