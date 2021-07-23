@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "faker": "^5.5.3",
     "mysql2": "^2.2.5",
     "node": "^16.5.0",
     "sequelize": "^6.6.5",
