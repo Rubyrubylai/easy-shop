@@ -4,10 +4,15 @@ const { Product } = db;
 module.exports = {
   getProducts: async(req, res) => {
     try {
+      let { limit, offset } = req.query;
+      if (limit) limit = Number(limit);
+      if (offset) offset = Number(offset);
       let products = await Product.findAll({
         raw: true,
         nest: true,
         attributes: ['name', 'price', 'image'],
+        offset,
+        limit,
         order: [
           ['updatedAt', 'DESC']
         ]
@@ -36,8 +41,8 @@ module.exports = {
         attributes: ['name', 'price', 'image', 'description']
       });
       if (!product) {
-        return res.json({
-          code: 400,
+        return res.status(404).json({
+          code: 404,
           message: 'productId does not exist.'
         });
       }
