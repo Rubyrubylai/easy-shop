@@ -21,7 +21,7 @@ module.exports = {
       console.error(`getProducts fail, ${err.message}`);
       return res.json({
         code: 500,
-        message: e.message
+        message: err.message
       });
     }
   },
@@ -51,7 +51,7 @@ module.exports = {
       console.error(`getProduct fail, ${err.message}`);
       return res.json({
         code: 500,
-        message: e.message
+        message: err.message
       });
     }
   }

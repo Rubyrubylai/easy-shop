@@ -7,12 +7,6 @@ module.exports = {
     const t = await sequelize.transaction();
     try {
       const { name, phone, email, address, amount, items } = req.body;
-      if (!name || !phone || !email || !address) {
-        return res.json({
-          code: 400,
-          message: 'All fields are required.'
-        });
-      }
 
       let order = await Order.create({
         name,
@@ -21,7 +15,7 @@ module.exports = {
         address,
         amount,
         status: 1
-      }, { transaction: t })
+      }, { transaction: t });
 
       let quantities = 0;
       for (let item of items) {
@@ -31,7 +25,7 @@ module.exports = {
           OrderId: order.id,
           price: item.price,
           quantity: item.quantity
-        }, { transaction: t })
+        }, { transaction: t });
       }
       
       await t.commit();
@@ -48,9 +42,10 @@ module.exports = {
     }
     catch (err) {
       console.error(`postOrder fail, ${err.message}`);
+      await t.rollback();
       return res.json({
         code: 500,
-        message: e.message
+        message: err.message
       });
     }
   }
