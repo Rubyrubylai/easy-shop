@@ -125,7 +125,7 @@ router.get('/product/:id', productController.getProduct);
 *               type: integer
 *               description: 購買總金額
 *               required: true
-*               example: 1000
+*               example: 1500
 *             address: 
 *               type: string
 *               description: 購買人地址
@@ -148,6 +148,7 @@ router.get('/product/:id', productController.getProduct);
 *               example: tony@example.com
 *             items:
 *               type: array
+*               description: 購買的商品
 *               items:
 *                 type: object
 *                 properties:
@@ -189,7 +190,7 @@ router.get('/product/:id', productController.getProduct);
 *                 amount:
 *                   type: integer
 *                   description: 購買總金額
-*                   example: 1000
+*                   example: 1500
 *                 status:
 *                   type: integer
 *                   description: 訂單狀態，0:失敗, 1:成功
