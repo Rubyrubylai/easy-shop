@@ -33,14 +33,25 @@ const validateMiddleware = require('../config/validateMiddleware');
 *               example: 200
 *             data:
 *               type: array
-*               example: [{"name": "skirt","price": 1000,"image": "http://placeimg.com/640/480"},{"name": "pants","price": 500,"image": "http://placeimg.com/640/480"}]
-*               properties:
-*                 name: 
-*                   type: string
-*                 price:
-*                   type: integer
-*                 image:
-*                   type: string
+*               items:
+*                 type: object
+*                 properties:
+*                   name:
+*                     type: string
+*                     description: 商品名稱
+*                   price:
+*                     type: integer
+*                     description: 商品價格
+*                   image:
+*                     type: string
+*                     description: 商品圖片的網址
+*               example:
+*               - name: skirt
+*                 price: 1000
+*                 image: http://placeimg.com/640/480
+*               - name: pants
+*                 price: 500
+*                 image: http://placeimg.com/640/480
 *       500:
 *         description: unexpected error
 */
@@ -135,21 +146,30 @@ router.get('/product/:id', productController.getProduct);
 *               description: 購買人信箱
 *               required: true
 *               example: tony@example.com
-*             items: 
+*             items:
 *               type: array
-*               description: 購買的商品
-*               required: true
-*               example: [{"productId": 1,"price": 500,"quantity": 2},{"productId": 2,"price": 500,"quantity": 1}]
-*               properties:
-*                 productId:
-*                   type: integer
-*                   description: 商品編號
-*                 price:
-*                   type: integer
-*                   description: 商品價格
-*                 quantity:
-*                   type: integer
-*                   description: 單一商品的購買數量
+*               items:
+*                 type: object
+*                 properties:
+*                   productId:
+*                     type: integer
+*                     required: true
+*                     description: 商品編號
+*                   price:
+*                     type: integer
+*                     required: true
+*                     description: 商品價格
+*                   quantity:
+*                     type: integer
+*                     required: true
+*                     description: 單一商品的購買數量
+*               example:
+*               - productId: 1
+*                 price: 500
+*                 quantity: 2
+*               - productId: 2
+*                 price: 500
+*                 quantity: 1
 *     responses:
 *       200:
 *         description: success
