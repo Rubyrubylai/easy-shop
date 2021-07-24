@@ -40,6 +40,6 @@ npm run dev
 
 |功能|URL|描述|
 |----|---|----|
-|首頁|/products|商品清單|
+|瀏覽|/products|商品清單|
 |瀏覽|/product/:id|商品明細|
-|新增|/order|新增一筆訂單|
+|新增|/order|建立一筆訂單|
